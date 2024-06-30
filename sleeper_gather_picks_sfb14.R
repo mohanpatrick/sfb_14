@@ -146,7 +146,7 @@ write_csv(sleeper_leagues, "league_ids_sleeper.csv")
 
 
 pb_upload("draft_metadata_sleeper.csv",
-          repo = "mohanpatrick/sfb_13",
+          repo = "mohanpatrick/sfb_14",
           tag = "data_sleeper")
 cli::cli_alert_success("Successfully uploaded to Git")
 
