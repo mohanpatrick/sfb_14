@@ -19,6 +19,7 @@ options(scipen = 999)
 
 search_year = "2024"
 sfb_sleeper_string = "\\#SFB14"
+get_adp = "TRUE"
 
 #### DELETE AFTER TESTING ########
 #GITHUB_PAT <- Sys.setenv("GITHUB_PAT")
@@ -162,8 +163,51 @@ pb_upload("draft_picks_sleeper.csv",
           tag = "data_sleeper")
 cli::cli_alert_success("Successfully uploaded to Git")
 
+if(get_adp == "TRUE") {
+
+
+master_player_ids <- dp_playerids() |>
+  select(mfl_id, sleeper_id, name, merge_name, position, team) |>
+  filter(position %in% c("QB","WR", "TE", "RB", "K", "PK", "FB")) |>
+  mutate(
+    cross_mfl_sleep_id = paste0(mfl_id, "-", sleeper_id),
+    sleeper_id = as.double(sleeper_id),
+    mfl_id = as.double(mfl_id),
+    clean_team = team
+  )
+
+draft_picks_sleeper <- draft_picks_sleeper |>
+  mutate(pos = ifelse(pos == "K", "PK", pos))|>
+  left_join(master_player_ids, by=c("player_id" = "sleeper_id", "pos" = "position"))
+
+sleeper_only_adp <- sleeper_for_adp |>
+  group_by(league_id,pos) |>
+  mutate(pos_rank = rank(overall)) |>
+  group_by(cross_mfl_sleep_id, name, pos) |>
+  summarise(
+    n = n(),
+    overall_avg = mean(overall, na.rm = TRUE) |> round(2),
+    overall_sd = sd(overall, na.rm = TRUE) |> round(2),
+    pos_avg = mean(pos_rank, na.rm = TRUE) |> round(2),
+    pos_sd = sd(pos_rank, na.rm = TRUE) |> round(2),
+    overall_min = min(overall, na.rm = TRUE),
+    overall_max = max(overall, na.rm = TRUE),
+    pos_min = min(pos_rank, na.rm = TRUE),
+    pos_max = max(pos_rank, na.rm = TRUE)
+  ) |>
+  ungroup() |>
+  arrange(overall_avg,-n)
+
+
+write_csv(sleeper_only_adp, "sleeper_only_adp.csv")
 
 
 
+pb_upload("sleeper_only_adp.csv",
+          repo = "mohanpatrick/sfb_14",
+          tag = "data_sleeper")
+cli::cli_alert_success("Successfully uploaded to Git")
+
+}
 
 
