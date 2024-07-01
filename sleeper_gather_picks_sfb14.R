@@ -176,9 +176,15 @@ master_player_ids <- dp_playerids() |>
     clean_team = team
   )
 
-draft_picks_sleeper <- draft_picks_sleeper |>
+draft_picks_sleeper <- sleeper_drafts |>
   mutate(pos = ifelse(pos == "K", "PK", pos))|>
   left_join(master_player_ids, by=c("player_id" = "sleeper_id", "pos" = "position"))
+
+
+sleeper_for_adp <- draft_picks_sleeper |>
+  select(league_id, cross_mfl_sleep_id, pos, clean_team, overall, player_name, name)|>
+  mutate(name =ifelse(!is.na(name), name, player_name))
+
 
 sleeper_only_adp <- sleeper_for_adp |>
   group_by(league_id,pos) |>
