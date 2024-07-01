@@ -177,7 +177,8 @@ master_player_ids <- dp_playerids() |>
   )
 
 draft_picks_sleeper <- sleeper_drafts |>
-  mutate(pos = ifelse(pos == "K", "PK", pos))|>
+  mutate(pos = ifelse(pos == "K", "PK", pos),
+         player_id = as.double(player_id))|>
   left_join(master_player_ids, by=c("player_id" = "sleeper_id", "pos" = "position"))
 
 
