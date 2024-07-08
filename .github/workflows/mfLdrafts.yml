@@ -1,6 +1,6 @@
 on:
   schedule:
-     - cron: "30 6,12 * * * *"
+     - cron: "30 6,12 * * *"
   workflow_dispatch:
   
 name: update_drafts_mfl
