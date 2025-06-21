@@ -20,8 +20,8 @@ options(dplyr.summarise.inform = FALSE,
 #GITHUB_PAT <- Sys.setenv("GITHUB_PAT")
 #Sys.setenv("MFL_CLIENT")
 
-search_year = "2024"
-sfb_mfl_string = "\\#SFB14"
+search_year = "2025"
+sfb_mfl_string = "\\#SFB15"
 mfl_client = "MFLRCLIENT"
 
 mfl_client <- Sys.getenv(c("MFL_CLIENT"))
