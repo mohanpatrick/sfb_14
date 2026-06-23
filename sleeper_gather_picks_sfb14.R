@@ -17,8 +17,8 @@ options(scipen = 999)
 
 # looks like the ff_connect doesn't return all of the avail draft vars?
 
-search_year = "2025"
-sfb_sleeper_string = "\\#SFB15"
+search_year = "2026"
+sfb_sleeper_string = "\\#SFB16"
 get_adp = "TRUE"
 
 #### DELETE AFTER TESTING ########
