@@ -183,7 +183,7 @@ draft_picks_sleeper <- sleeper_drafts |>
 
 
 sleeper_for_adp <- draft_picks_sleeper |>
-  select(league_id, cross_mfl_sleep_id, pos, clean_team, overall, player_name, name)|>
+  select(league_id,sleeper_id, cross_mfl_sleep_id, pos, clean_team, overall, player_name, name)|>
   mutate(name =ifelse(!is.na(name), name, player_name))
 
 
