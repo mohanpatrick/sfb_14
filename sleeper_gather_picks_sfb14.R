@@ -190,7 +190,7 @@ sleeper_for_adp <- draft_picks_sleeper |>
 sleeper_only_adp <- sleeper_for_adp |>
   group_by(league_id,pos) |>
   mutate(pos_rank = rank(overall)) |>
-  group_by(cross_mfl_sleep_id, name, pos) |>
+  group_by(cross_mfl_sleep_id,sleeper_id, name, pos) |>
   summarise(
     n = n(),
     overall_avg = mean(overall, na.rm = TRUE) |> round(2),
