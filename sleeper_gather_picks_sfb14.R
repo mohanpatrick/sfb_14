@@ -214,4 +214,4 @@ if(get_adp == "TRUE") {
             repo = "mohanpatrick/sfb_14",
             tag = "data_sleeper")
   cli::cli_alert_success("Successfully uploaded to Git")
-  
+  }
