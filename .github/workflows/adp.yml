@@ -3,7 +3,7 @@ on:
      - cron: "30 7,16 * * *"
   workflow_dispatch:
   
-name: update_drafts_mfl
+name: update_adp_mfl
 
 jobs:
   adp_update_data:
