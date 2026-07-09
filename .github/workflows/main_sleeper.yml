@@ -1,6 +1,6 @@
 on:
   schedule:
-     - cron: "30 11 * * 2"
+     - cron: "30 11,18 * * *"
   workflow_dispatch:
   
 name: update_drafts_sleeper
